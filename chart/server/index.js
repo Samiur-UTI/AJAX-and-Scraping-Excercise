@@ -1,19 +1,13 @@
-import mysql from "mysql";
-import fastcsv from "fast-csv";
-import fs from "fs";
-
-let stream = fs.createReadStream("test.csv");
-let csvData = [];
-let csvStream = fastcsv
-  .parse();
-//   .on("data", function(data) {
-//     csvData.push(data);
-//   })
-//   .on("end", function() {
-//     // remove the first line: header
-//     csvData.shift();
-
-//     // connect to the MySQL database
-//     // save csvData
-//   });
-  stream.pipe(csvStream);
+const express = require('express');
+var app = express();
+const cors = require('cors')
+var fs = require('fs').promises;
+var parse = require('csv-parse/lib/sync');
+app.get('/',cors(), async (req, res) => {
+  (async function () {
+    const fileContent = await fs.readFile('test.csv');
+    const records = parse(fileContent);
+    res.send(records);
+})();
+});
+app.listen('3000',() => console.log('listening on 3000'));

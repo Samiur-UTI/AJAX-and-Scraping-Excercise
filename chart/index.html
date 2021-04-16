@@ -11,7 +11,7 @@
         fetchData();
         async function fetchData(){
           try {
-            const data = await fetch('https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv');
+            const data = await fetch('http://localhost:3000/');
             const table = await data.text();
             console.log(table);
           } catch (error) {
