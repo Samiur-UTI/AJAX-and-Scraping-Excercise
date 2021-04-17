@@ -6,7 +6,7 @@ var parse = require('csv-parse/lib/sync');
 app.get('/',cors(), async (req, res) => {
   (async function () {
     const fileContent = await fs.readFile('test.csv');
-    const records = parse(fileContent);
+    const records = parse(fileContent,{columns:true});
     res.send(records);
 })();
 });
