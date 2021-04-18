@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
 </head>
 <body>
-    <canvas id="chart" width="400" height="400">
+    <canvas id="chart" width="400" height="800">
 
     </canvas>
     <script>
@@ -16,11 +16,11 @@
         const year = [];
         const temp = [];
         const myChart = new Chart(ctx, {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: year,
                 datasets: [{
-                    label: '# of Votes',
+                    label: 'Global Temperature',
                     data: temp,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -56,7 +56,7 @@
             const table = await data.text();
             JSON.parse(table).map(item => {
                 year.push(item["Year"]);
-                temp.push(item["Glob"]);
+                temp.push(parseFloat(item["Glob"])+14);
             });
             
           } catch (error) {
